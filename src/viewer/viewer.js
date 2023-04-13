@@ -1267,9 +1267,9 @@ export class Viewer extends EventDispatcher{
 			this.mapView.init();
 
 			i18n.init({
-				lng: 'en',
+				lng: 'pt',
 				resGetPath: Potree.resourcePath + '/lang/__lng__/__ns__.json',
-				preload: ['en', 'fr', 'de', 'jp', 'se', 'es', 'zh', 'it','ca'],
+				preload: ['pt','en', 'fr', 'de', 'jp', 'se', 'es', 'zh', 'it','ca'],
 				getAsync: true,
 				debug: false
 			}, function (t) {

@@ -1,0 +1,98 @@
+{
+	"tb": {
+		"navigation_opt": "Navegação",
+		"rendering_opt": "Visualização",
+		"tools_opt": "Ferramentas",
+		"measurments_opt": "Medições",
+		"clipping_opt": "Recorte",
+		"annotations_opt": "Anotações",
+		"materials_opt": "Materiais",
+		"scene_opt": "Cena",
+		"filters_opt": "Filtros",
+		"classification_filter_opt": "Filtro de Classificação",
+		"parameters_opt": "Outras configurações",
+		"about_opt": "Sobre"
+	},
+	"tt": {
+		"angle_measurement": "Medição de Ângulo",
+		"point_measurement": "Medição de Ponto",
+		"distance_measurement": "Medição de Distância",
+		"height_measurement": "Medição de Altura",
+		"area_measurement": "Medição de Área",
+		"volume_measurement": "Medição de Volume",
+		"height_profile": "Perfil de Altura",
+		"clip_volume": "Recorte de Volume",
+		"clip_polygon": "Recorte Poligonal",
+		"screen_clip_box": "Desenhe uma caixa de seleção. Requer que você esteja no modo de câmera ortográfica",
+		"clip_plane_x": "Plano de Recorte no Eixo X",
+		"clip_plane_y": "Plano de Recorte no Eixo Y",
+		"clip_plane_z": "Plano de Recorte no Eixo Z",
+		"remove_all_measurement": "Remover todas as medições",
+		"left_view_control": "Visualização Esquerda",
+		"right_view_control": "Visualização Direita",
+		"front_view_control": "Visualização de Frente",
+		"back_view_control": "Visualização de Trás",
+		"top_view_control": "Visualização Superior",
+		"bottom_view_control": "Visualização Inferior",
+		"focus_control": "Foco Total",
+		"orbit_control": "Controle de Órbita",
+		"flight_control": "Controle de Voo",
+		"heli_control": "Controle de Helicóptero",
+		"earth_control": "Controle da Terra",
+		"perspective_camera_control": "Câmera Perspectiva",
+		"orthographic_camera_control": "Câmera Ortográfica",
+		"navigation_cube_control": "Cubo de Navegação",
+		"remove_all_clipping_volumes": "Remover todos os volumes de recorte"
+	},
+	"appearance": {
+		"nb_max_pts": "Orçamento de Pontos", 
+		"point_size": "Tamanho do Ponto",
+		"point_opacity": "Opacidade",
+		"field_view": "Campo de Visão",
+		"point_size_type": "Dimensionamento de Pontos",
+		"point_material": "Materiais",
+		"elevation_range": "Faixa de Elevação",
+		"point_quality": "Qualidade",
+		"point_shape": "Forma",
+		"edl_radius": "Raio",
+		"edl_strength": "Força",
+		"edl_enable": "Habilitar",
+		"min_node_size": "Tamanho mínimo do nó",
+		"clip_mode": "Modo de recorte",
+		"move_speed": "Velocidade de movimento",
+		"skybox": "Skybox",
+		"bottom_lock": "Manter no chão",
+		"box": "Caixa",
+		"length_unit": "Unidade de comprimento",
+		"freeze": "Congelar visualização",
+		"language": "Idioma"
+		},
+		"measurements": {
+		"clip": "Recorte",
+		"show": "Mostrar volume"
+		},
+		"annotations": {
+		"show3D": "Mostrar em 3D",
+		"showMap": "Mostrar no mapa"
+		},
+		"profile": {
+		"nb_points": "Número de pontos",
+		"title": "Perfil de altura",
+		"save_las": "Salvar LAS (3D)",
+		"save_ortho": "Salvar CSV (2D)"
+		},
+		"scene": {
+		"camera_position": "Posição da câmera",
+		"camera_target": "Alvo da câmera"
+		},
+		"filters": {
+		"return_number": "Return Number",
+		"number_of_returns": "Number of Returns",
+		"gps_min": "min",
+		"gps_max": "max",
+		"gps_time": "GPS Time"
+		},		
+		"settings": {
+		"language": "Idioma"
+		}
+		}
