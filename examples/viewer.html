@@ -5,7 +5,7 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-	<title>Potree Viewer</title>
+	<title>Automa Viewer</title>
 
 	<link rel="stylesheet" type="text/css" href="../build/potree/potree.css">
 	<link rel="stylesheet" type="text/css" href="../libs/jquery-ui/jquery-ui.min.css">
@@ -48,17 +48,17 @@
 		viewer.loadSettingsFromURL();
 		viewer.setBackground("skybox");
 		
-		viewer.setDescription("Point cloud courtesy of <a target='_blank' href='https://www.sigeom.ch/'>sigeom sa</a>");
+		viewer.setDescription("Visualizador de Lote 3D");
 		
 		viewer.loadGUI(() => {
-			viewer.setLanguage('en');
+			viewer.setLanguage('pt');
 			$("#menu_tools").next().show();
 			$("#menu_clipping").next().show();
 			viewer.toggleSidebar();
 		});
 		
 		// Load and add point cloud to scene
-		Potree.loadPointCloud("../pointclouds/vol_total/cloud.js", "sigeom.sa", e => {
+		Potree.loadPointCloud("https://moduloautoma.ddns.net:900/plataforma/ArquivosGemeos/convertidos%20ply/cloud.js", "automageo.com", e => {
 			let scene = viewer.scene;
 			let pointcloud = e.pointcloud;
 			
