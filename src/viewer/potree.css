@@ -27,21 +27,21 @@
 
 :root{
 	
-	--color-0: 			rgba( 25, 40, 44, 1);
-	--color-1: 			rgba(122,129,132, 1);
-	--color-2: 			rgba( 57, 71, 75, 1);
-	--color-3: 			rgba( 45,109,130, 1);
-	--color-4: 			rgba( 16,143,185, 1);
+	--color-0: 			#172124;
+	--color-1: 			#ffffff;
+	--color-2: 			#202020;
+	--color-3: 			#2d6d82;
+	--color-4: 			#108fb9;
 	
 	--bg-color:			var(--color-0);
-	--bg-color-2:		rgb(60, 80, 85);
-	--bg-light-color:	rgba( 48, 61, 65, 1);
-	--bg-dark-color:	rgba( 24, 31, 33, 1);
+	--bg-color-2:		#3c5055;
+	--bg-light-color:	#303d41;
+	--bg-dark-color:	#181f21;
 	--bg-hover-color:	var(--color-2);
 	
-	--font-color:		#9AA1A4;
-	--font-color-2:		#ddd;
-	--font-color:		#cccccc;
+	--font-color:		#ffffff;
+	--font-color-2:		#ffffff;
+	--font-color:		#ffffff;
 	--border-color:		black;
 	
 	--measurement-detail-node-bg-light:		var(--color-1);
@@ -52,13 +52,14 @@
 }
 
 #potree_sidebar_container{
+	font-family: 'roboto';
 	position:	absolute;
 	z-index:	0;
 	width:		350px;
 	height:		100%;
 	overflow-y:	scroll;
 	font-size:	85%;
-	border-right:	1px solid black;
+	border-right:	1px solid white;
 	background-color:	var(--bg-color);
 }
 
@@ -128,7 +129,7 @@
 }
 
 #potree_sidebar_container a{
-	color: 			#8Aa1c4;
+	color: 			#ffffff;
 }
 
 #potree_quick_buttons{
@@ -188,7 +189,7 @@
 }
 
 a:hover, a:visited, a:link, a:active{
-	color: 				#ccccff;
+	color: 				#ffffff;
 	text-decoration: 	none;
 }
 
@@ -330,7 +331,7 @@ body{
 }
 
 .axis path{
-	fill: 		rgba(255, 255, 255, 0.5);
+	fill: 		rgb(255, 255, 255);
 	stroke: 		var(--font-color);
 	shape-rendering: crispEdges;
 	opacity: 		0.7;

@@ -73,7 +73,7 @@
 		"length_unit": "Length unit",
 		"freeze": "Lock view",
 		"language": "Language",
-		"backface_culling": "Backface Culling"
+		"backface_culling": "seleção de backface"
 	},
 	"measurements": {
 		"clip": "clip",
