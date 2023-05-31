@@ -2,8 +2,8 @@
 <html lang="pt">
 <head>
 	<meta charset="utf-8">
-	<meta name="description" content="">
-	<meta name="author" content="">
+	<meta name="description" content="Carrega Nuvem de Pontos do Lote">
+	<meta name="author" content="Ramon Veloso">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 	<title>Automa Viewer</title>
 
@@ -19,7 +19,6 @@
 	<script src="../libs/spectrum/spectrum.js"></script>
 	<script src="../libs/jquery-ui/jquery-ui.min.js"></script>
 	
-	
 	<script src="../libs/other/BinaryHeap.js"></script>
 	<script src="../libs/tween/tween.min.js"></script>
 	<script src="../libs/d3/d3.js"></script>
@@ -30,21 +29,20 @@
 	<script src="../build/potree/potree.js"></script>
 	<script src="../libs/plasio/js/laslaz.js"></script>
 	
-	<!-- INCLUDE ADDITIONAL DEPENDENCIES HERE -->
-	<!-- INCLUDE SETTINGS HERE -->
-	
 	<div class="potree_container" style="position: absolute; width: 100%; height: 100%; left: 0px; top: 0px; ">
 		<div id="potree_render_area" style="background-color: gradient;"></div>
 		<div id="potree_sidebar_container"> </div>
 	</div>
 	
 	<script type="module">
+		import { FirstPersonControls } from '../src/navigation/FirstPersonControls.js';
+		import { GeoControls } from './src/navigation/GeoControls.js';
 
 		window.viewer = new Potree.Viewer(document.getElementById("potree_render_area"));
 		
 		viewer.setEDLEnabled(false);
 		viewer.setFOV(60);
-		viewer.setPointBudget(1_000_000);
+		viewer.setPointBudget(5_000_000);
 		viewer.loadSettingsFromURL();
 		viewer.setBackground("gradient");
 		
@@ -54,28 +52,36 @@
 			viewer.setLanguage('pt');
 			$("#menu_tools").next().show();
 			$("#menu_clipping").next().show();
-			viewer.toggleSidebar();
+			//viewer.toggleSidebar();
 		});
 		
-		// Load and add point cloud to scene
-		Potree.loadPointCloud("https://moduloautoma.ddns.net:900/plataforma/ArquivosGemeos/convertidos%20ply/cloud.js", "automageo.com", e => {
+
+		// Carregando a nuvem de pontos de Ibate 01
+		Potree.loadPointCloud("https://moduloautoma.ddns.net:900/plataforma/ArquivosGemeos/Ibate04/Clouds/Ibate04/cloud.js", "Ibate 4", e => {
 			let scene = viewer.scene;
 			let pointcloud = e.pointcloud;
 			
 			let material = pointcloud.material;
+			// Define um novo tamanho de ponto menor (10 pixels, por exemplo)
+			material.pointSize = 1;
 			material.size = 1;
 			material.pointSizeType = Potree.PointSizeType.ADAPTIVE;
 			material.shape = Potree.PointShape.SQUARE;
 			
-			scene.addPointCloud(pointcloud);
-			
-			viewer.fitToScreen();
-			// scene.view.setView(
-			// 	[589974.341, 231698.397, 986.146],
-			// 	[589851.587, 231428.213, 715.634],
-			// );
-		});
+			//pointcloud.position.set(193147.000, 7567693.000, 972.000); // informações de georreferenciamento
+			//pointcloud.rotation.set(rx, ry, rz); // informações de georreferenciamento
 
+			scene.addPointCloud(pointcloud);
+
+			// Configure First Person Controls
+			//let firstPersonControls = new FirstPersonControls(viewer);
+			//viewer.setControls(firstPersonControls);
+			// Configure GeoControls
+			let geoControls = new GeoControls(viewer);
+			viewer.setControls(geoControls);
+
+			viewer.fitToScreen();
+		});
 	</script>
 </body>
 </html>
