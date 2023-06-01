@@ -1,82 +1,137 @@
 <!DOCTYPE html>
 <html lang="pt">
-<head>
-	<meta charset="utf-8">
-	<meta name="description" content="Carrega Nuvem de Pontos do Lote">
-	<meta name="author" content="Ramon Veloso">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-	<title>Automa Viewer</title>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="description" content="Carrega Nuvem de Pontos do Lote" />
+    <meta name="authors" content="Ramon Veloso e Mathias Luz" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no"
+    />
+    <title>Automa Viewer</title>
 
-	<link rel="stylesheet" type="text/css" href="build/potree/potree.css">
-	<link rel="stylesheet" type="text/css" href="libs/jquery-ui/jquery-ui.min.css">
-	<link rel="stylesheet" type="text/css" href="libs/openlayers3/ol.css">
-	<link rel="stylesheet" type="text/css" href="libs/spectrum/spectrum.css">
-	<link rel="stylesheet" type="text/css" href="libs/jstree/themes/mixed/style.css">
-</head>
+    <link rel="stylesheet" type="text/css" href="build/potree/potree.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="libs/jquery-ui/jquery-ui.min.css"
+    />
+    <link rel="stylesheet" type="text/css" href="libs/openlayers3/ol.css" />
+    <link rel="stylesheet" type="text/css" href="libs/spectrum/spectrum.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="libs/jstree/themes/mixed/style.css"
+    />
+  </head>
 
-<body>
-	<script src="libs/jquery/jquery-3.1.1.min.js"></script>
-	<script src="libs/spectrum/spectrum.js"></script>
-	<script src="libs/jquery-ui/jquery-ui.min.js"></script>
-	
-	<script src="libs/other/BinaryHeap.js"></script>
-	<script src="libs/tween/tween.min.js"></script>
-	<script src="libs/d3/d3.js"></script>
-	<script src="libs/proj4/proj4.js"></script>
-	<script src="libs/openlayers3/ol.js"></script>
-	<script src="libs/i18next/i18next.js"></script>
-	<script src="libs/jstree/jstree.js"></script>
-	<script src="build/potree/potree.js"></script>
-	<script src="libs/plasio/js/laslaz.js"></script>
-	
-	<div class="potree_container" style="position: absolute; width: 100%; height: 100%; left: 0px; top: 0px; ">
-		<div id="potree_render_area" style="background-color: gradient;"></div>
-		<div id="potree_sidebar_container"> </div>
-	</div>
-	
-	<script type="module">
-		import { FirstPersonControls } from './src/navigation/FirstPersonControls.js';
-		import { GeoControls } from './src/navigation/GeoControls.js';
-		
-		window.viewer = new Potree.Viewer(document.getElementById("potree_render_area"));
-		
-		viewer.setEDLEnabled(false);
-		viewer.setFOV(60);
-		viewer.setPointBudget(5_000_000);
-		viewer.loadSettingsFromURL();
-		viewer.setBackground("gradient");
-		
-		viewer.setDescription("Visualizador de Lote 3D");
-		
-		viewer.loadGUI(() => {
-			viewer.setLanguage('pt');
-			$("#menu_tools").next().show();
-			$("#menu_clipping").next().show();
-			//viewer.toggleSidebar();
-		});
+  <body>
+    <script src="libs/jquery/jquery-3.1.1.min.js"></script>
+    <script src="libs/spectrum/spectrum.js"></script>
+    <script src="libs/jquery-ui/jquery-ui.min.js"></script>
 
-		// Load and add point cloud to scene
-		Potree.loadPointCloud("http://192.168.0.122:8080/object_potree/cloud.js", "exemplo", e => {
-			let scene = viewer.scene;
-			let pointcloud = e.pointcloud;
-			
-			let material = pointcloud.material;
-			material.size = 1;
-			material.pointSizeType = Potree.PointSizeType.ADAPTIVE;
-			material.shape = Potree.PointShape.SQUARE;
-			
-			scene.addPointCloud(pointcloud);
+    <script src="libs/other/BinaryHeap.js"></script>
+    <script src="libs/tween/tween.min.js"></script>
+    <script src="libs/d3/d3.js"></script>
+    <script src="libs/proj4/proj4.js"></script>
+    <script src="libs/openlayers3/ol.js"></script>
+    <script src="libs/i18next/i18next.js"></script>
+    <script src="libs/jstree/jstree.js"></script>
+    <script src="build/potree/potree.js"></script>
+    <script src="libs/plasio/js/laslaz.js"></script>
 
-			// Configure First Person Controls
-			//let firstPersonControls = new FirstPersonControls(viewer);
-			//viewer.setControls(firstPersonControls);
-			// Configure GeoControls
-			let geoControls = new GeoControls(viewer);
-			viewer.setControls(geoControls);
+    <div
+      class="potree_container"
+      style="position: absolute; width: 100%; height: 100%; left: 0px; top: 0px"
+    >
+      <div id="potree_render_area" style="background-color: gradient"></div>
+      <div id="potree_sidebar_container"></div>
+    </div>
 
-			viewer.fitToScreen();
-		});
-		
-	</script>
-</body>
+    <script type="module">
+      import { FirstPersonControls } from "./src/navigation/FirstPersonControls.js";
+      import { GeoControls } from "./src/navigation/GeoControls.js";
+      import { EarthControls } from "./src/navigation/EarthControls.js";
+      import { OrbitControls } from "./src/navigation/OrbitControls.js";
+      import * as THREE from "./libs/three.js/build/three.module.js";
+      import { GLTFLoader } from "./libs/three.js/loaders/GLTFLoader.js";
+      const MODEL_PATH =
+        "https://moduloautoma.ddns.net:900/plataforma/ArquivosGemeos/Ibate08/Ibate08.gltf";
+
+      window.viewer = new Potree.Viewer(
+        document.getElementById("potree_render_area")
+      );
+
+      viewer.setEDLEnabled(false);
+      viewer.setFOV(60);
+      viewer.setPointBudget(5_000_000);
+      viewer.loadSettingsFromURL();
+      viewer.setBackground("gradient");
+
+      viewer.setDescription("Visualizador de Lote 3D");
+
+      viewer.loadGUI(() => {
+        viewer.setLanguage("pt");
+        $("#menu_tools").next().show();
+        $("#menu_clipping").next().show();
+        //viewer.toggleSidebar();
+      });
+
+      // Load and add point cloud to scene "http://192.168.0.122:8080/object_potree/cloud.js", "exemplo"
+      Potree.loadPointCloud(
+        "https://moduloautoma.ddns.net:900/plataforma/ArquivosGemeos/Ibate08/Clouds/Ibate08/cloud.js",
+        "Ibate 8",
+        (e) => {
+          let scene = viewer.scene;
+          let pointcloud = e.pointcloud;
+
+          let material = pointcloud.material;
+          material.size = 1;
+          material.pointSizeType = Potree.PointSizeType.ADAPTIVE;
+          material.shape = Potree.PointShape.CIRCLE;
+
+          scene.addPointCloud(pointcloud);
+
+          // Configure First Person Controls
+          //let firstPersonControls = new FirstPersonControls(viewer);
+          //viewer.setControls(firstPersonControls);
+          // Configure GeoControls - EarthControls?
+          let geoControls = new GeoControls(viewer);
+          viewer.setControls(geoControls);
+
+          viewer.fitToScreen();
+        }
+      );
+
+      var loader = new GLTFLoader();
+      let model;
+      // load model
+      loader.load(
+        MODEL_PATH,
+        function (gltf) {
+          // Loader function
+          model = gltf.scene;
+          let fileAnimations = gltf.animations;
+          let material = new THREE.MeshBasicMaterial({ color: 0x7A040A,opacity: 0.63, transparent: true });
+          // Enable the ability to cast and receive shadows
+          model.traverse((o) => {
+            if (o.isMesh) {
+              o.castShadow = true;
+              o.receiveShadow = true;
+              o.material = material;              
+            }
+          });
+          model.rotation.x = -Math.PI / 2;
+          model.rotation.z = Math.PI;
+          model.rotation.y = Math.PI;
+          viewer.scene.scene.add(model);
+        },
+        undefined, // Loading function
+        function (error) {
+          // Error function
+          console.error(error);
+        }
+      );
+    </script>
+  </body>
 </html>
